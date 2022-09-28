@@ -57,7 +57,7 @@ var accessTokens=[]
  * 
 /** @type {*} */
 var autoTestMain= function(){
-    n=1
+    n=10
     testerBasic("Server Automated Tests");
     testMainLogger("Starting Test Sequencies for",n,"users")
     userCaseAlpha(n)

@@ -32,7 +32,7 @@ const {jwtToken} = require('../dbModel/jwtModel.js');
 module.exports.generateAccessToken =  function(payLoad){
     
     //Generate Access Token with the given payLoad
-    const accessToken = jwt.sign(payLoad,process.env.ACCESS_TOKEN_SECRET,{expiresIn:'1m'})
+    const accessToken = jwt.sign(payLoad,process.env.ACCESS_TOKEN_SECRET,{expiresIn:'10m'})
     //return the Access Token
     return accessToken
 
@@ -48,20 +48,26 @@ module.exports.generateAccessToken =  function(payLoad){
  * 
  */
 module.exports.generateRefressToken = function(payLoad,callback){
-    //Generate the refresh token with the given payLoad
-    const refreshToken = jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET)
-    //create a new mongoose jtwToken document
-    let newToken = new jwtToken({
-        key:refreshToken,
-        owner:payLoad._id
-    })
-    //Save it at the database
-    newToken.save((error,savedToken)=>{
-        if(error){
-            console.log(error)
-          }
-          //Pass the refreshToken at the callback function
-          callback(savedToken.key)
+    jwtToken.findOne({owner:payLoad._id},(err,result)=>{
+        if(result){
+            callback(result.key)
+            return;
+        }
+        //Generate the refresh token with the given payLoad
+        const refreshToken = jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET)
+        //create a new mongoose jtwToken document
+        let newToken = new jwtToken({
+            key:refreshToken,
+            owner:payLoad._id
+        })
+        //Save it at the database
+        newToken.save((error,savedToken)=>{
+            if(error){
+                console.log(error)
+            }
+            //Pass the refreshToken at the callback function
+            callback(savedToken.key)
+        })
     })
 }
 

@@ -28,34 +28,34 @@ let {responseLogger,requestLogger} = require("../utils/logger.js")
  */
 module.exports.loginPost = (req,res)=>{
   //Loggin the request at the server terminal
-    requestLogger(req);
-    //extracting the parametres from the request Body
-    const { username, password } = req.body;
-    //Search the Database for a match
-    userController.verifyUser(username,password,(result)=>{
-      if (result){
-        //If the user is found in the dataBase, create the JWT tokens and send them
-        let jwtPayLoad = {
-          _id:result._id,
-          username:result.username
-        }
-        let accessToken= jwtController.generateAccessToken(jwtPayLoad);
-        jwtController.generateRefressToken(jwtPayLoad,(refreshToken)=>{
-          res.json({
-            accessToken:accessToken,
-            refreshToken:refreshToken 
-         })
-         //Logging the response at the server terminal
-         responseLogger(res)
-        })
-      }else{
-        //If the Authendication fails at any point, return a 401:Bad Request Status
-        res.status(400).end()
+  requestLogger(req);
+  //extracting the parametres from the request Body
+  const { username, password } = req.body;
+   //Search the Database for a match
+  userController.verifyUser(username,password,(result)=>{
+    if (result){
+      //If the user is found in the dataBase, create the JWT tokens and send them
+      let jwtPayLoad = {
+         _id:result._id,
+         username:result.username
+      };
+      let accessToken= jwtController.generateAccessToken(jwtPayLoad);
+      jwtController.generateRefressToken(jwtPayLoad,(refreshToken)=>{
+        res.status(200).json({
+          accessToken:accessToken,
+          refreshToken:refreshToken 
+        }).end();
         //Logging the response at the server terminal
-        responseLogger(res)
-      }
-    })
-  }
+        responseLogger(res);
+      });
+    }else{
+      //If the Authendication fails at any point, return a 401:Bad Request Status
+      res.status(400).end()
+      //Logging the response at the server terminal
+      responseLogger(res)
+    }
+  })
+}
 /**
  *  Handles the /register POST request.
  *  Send the server a new user's Data in the request body to create a new user in the data base
@@ -82,11 +82,11 @@ module.exports.registerPost = (req,res)=>{
     //Try to add the user in the Data Base
     userController.addUser(fName,lName,username,email,password,(savedUser)=>{
       if(savedUser){
-        //If the operation was succssefull return a 200 status code
-        res.status(200).end();
+        //If the operation was succssefull return a 201 status code
+        res.status(201).end();
       }else{
         //If the operation fails return a 400:Bad reuest status code
-        res.status(400)
+        res.status(400).end()
       }
     })
     //Logging the response at the server terminal
@@ -215,7 +215,7 @@ module.exports.verifyAccessToken=(req,res,next)=>{
     return;
   }
   //Verrify the Access Token
-  jwtController.verifyAccessToken(token,(error,user)=>{
+  jwtController.verifyAccessToken(token,(error,jwtPayLoad)=>{
     if(error){
       //if there is an error respond with 403:Forbidden status
       res.status(403).send().end();
@@ -223,6 +223,7 @@ module.exports.verifyAccessToken=(req,res,next)=>{
       responseLogger(res)
       return;
     }else if(res.statusCode == 200){
+      req.jwtPayLoad = jwtPayLoad;
       //else, if no change was make to the status code, call the next function
       next()
     }

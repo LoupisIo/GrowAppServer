@@ -12,6 +12,10 @@ router.use(express.json())
 
 router.delete("/user",authController.verifyAccessToken,userController.deleteUser)
 
+router.patch("/user/mail",authController.verifyAccessToken,userController.updateUserMail)
+
+router.patch("/user/password",authController.verifyAccessToken,userController.updateUserPassWord)
+
 
 
 
