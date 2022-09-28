@@ -1,5 +1,5 @@
 /** Authendication Controller handling all the authendication functions.
- * @module controllers/Authendication
+ * @module controllers/Authentication
  * @requires {@link module:controllers/DataBase}
  * @requires {@link module:controllers/User}
  * @requires {@link module:controllers/JWT}
@@ -16,7 +16,7 @@ let {responseLogger,requestLogger} = require("../utils/logger.js")
  *  Responses with an Access Token on successs
  * @name loginPost
  * @function
- * @memberof module:controllers/Authendication
+ * @memberof module:controllers/Authentication
  * @inner
  * @param {Object} req - Express Request Object
  * @param {string} req.body.username - The User's username
@@ -61,7 +61,7 @@ module.exports.loginPost = (req,res)=>{
  *  Send the server a new user's Data in the request body to create a new user in the data base
  * @name registerPost
  * @function
- * @memberof module:controllers/Authendication
+ * @memberof module:controllers/Authentication
  * @inner
  * @param {Object} req - The http request Object
  * @param {string} req.body.fName - The first name of the new user
@@ -84,13 +84,14 @@ module.exports.registerPost = (req,res)=>{
       if(savedUser){
         //If the operation was succssefull return a 201 status code
         res.status(201).end();
+        responseLogger(res);
       }else{
         //If the operation fails return a 400:Bad reuest status code
         res.status(400).end()
+        responseLogger(res);
       }
     })
-    //Logging the response at the server terminal
-    responseLogger(res);    
+    //Logging the response at the server terminal    
 }
 
 /**
@@ -98,7 +99,7 @@ module.exports.registerPost = (req,res)=>{
  * Logs out an user by deleting his refresh token from the Data Base
  * @name logoutGet
  * @function
- * @memberof module:controllers/Authendication
+ * @memberof module:controllers/Authentication
  * @param {Object} req - Express Request Object
  * @param {string} req.body.token - The refresh Token of the user
  * @param {Object} res - Express Response Object
@@ -131,7 +132,7 @@ module.exports.logoutGet = (req,res)=>{
  * Generates a new Access Token for the user 
  * @name refreshToken
  * @function
- * @memberof module:controllers/Authendication
+ * @memberof module:controllers/Authentication
  * @inner
  * @param {Object} req - The express Request Object
  * @param {string} req.body.refreshToken - The refresh token of the user
@@ -192,7 +193,7 @@ module.exports.refreshToken=(req,res)=>{
  * @name verifyAccessToken
  * @function
  * @middleware
- * @memberof module:controllers/Authendication
+ * @memberof module:controllers/Authentication
  * @inner
  * @param {Object} req - Express Request Object
  * @param {string} req.headers.authorization - The accessToken is inside this string after the bearer keyword

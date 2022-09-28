@@ -1,9 +1,9 @@
 require('dotenv').config()
 
 /** Express Router handling the Authendication related routes
- * @module routers/Authendication
- * @requires express
- * @requires  {@link module:controllers/Authendication}
+ * @module routers/Authentication
+ * @requires {@link https://www.npmjs.com/package/express|Express}
+ * @requires  {@link module:controllers/Authentication}
  */
 
 /**
@@ -31,7 +31,7 @@ router.use(express.json())
  * 
  * @name post/register
  * @function
- * @memberof module:routers/Authendication
+ * @memberof module:routers/Authentication
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware
@@ -44,7 +44,7 @@ router.post("/register",authController.registerPost)
  * Route serving login form
  * @name post/login
  * @function
- * @memberof module:routers/Authendication 
+ * @memberof module:routers/Authentication 
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware
@@ -57,7 +57,7 @@ router.post("/login",authController.loginPost)
  * Route serving the log out path
  * @name post/logout
  * @function
- * @memberof module:routers/Authendication 
+ * @memberof module:routers/Authentication 
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware
@@ -70,7 +70,7 @@ router.get("/logout",authController.logoutGet)
  * Route serving the refresh token
  * @name post/token
  * @function
- * @memberof module:routers/Authendication
+ * @memberof module:routers/Authentication
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware

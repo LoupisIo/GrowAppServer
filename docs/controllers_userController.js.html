@@ -28,14 +28,13 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**User controller
  * @module controllers/user
- * @requires mongoose
- * @requires bcrypt
- * @requires dotenv
+ * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
+ * @requires {@link √https://www.npmjs.com/package/bcrypt|bcrypt}
+ * @requires {@link https://www.npmjs.com/package/dotenv|dotenv}
  * @requires responseLogger {@link module:logger}
  * @requires requestLogger {@link module:logger}
  * @requires {@link module:models/user}
  */
-
 
 
 require('dotenv').config();
@@ -47,7 +46,7 @@ let {responseLogger,requestLogger} = require("../utils/logger.js");
 
 //Create a connetion to the database
 const uri = "mongodb+srv://"+process.env.DbUser+":"+process.env.DbKey+"@cluster0.ravkk.mongodb.net/Thesis?retryWrites=true&amp;w=majority";
-mongoose.connect(uri);
+//mongoose.connect(uri);
 
 
 /**
@@ -105,25 +104,26 @@ async function addUser(fName,lName,username,email,password,callback){
     key:password,
     sensors:[]
   })
-  //Check if a user with the same username of email exists
-  user.findOne({$or:[{username:username},{email:email}]},async function(err,result){
+  //Check if a user with the same username or email exists
+  user.findOne({$or:[{username:username},{email:email}]},function(err,result){
     //Pass null at the callback on error or if a user is found
     if(err){
       callback(null)
     };
     if(result){
       callback(null)
+    }else{
+      //Now we know that there is not a user with the same username or email
+      //So we save the user to the database
+      newUser.save((error,savedUser)=>{
+        //On error pass null to the cal;back
+        if(error){
+          callback(null)
+        }
+        //else the new user
+        callback(savedUser)
+      })
     }
-  })
-  //Now we know that there is not a user with the same username or email
-  //So we save the user to the database
-  newUser.save((error,savedUser)=>{
-    //On error pass null to the cal;back
-    if(error){
-      callback(null)
-    }
-    //else the new user
-    callback(savedUser)
   })
 }
 
@@ -195,8 +195,80 @@ function deleteUser(req,res){
   })
 
 }
+/**
+ * Handles the UPDATE /user/mail request
+ * @name updateUserMail
+ * @function
+ * @async
+ * @memberof module:controllers/user
+ * @param {Object} req - Express Request Object
+ * @param {string} req.body._id - The _id of the user to be upated
+ * @param {string} res.body.email
+ * @param {Object} res.jwtPayLoad - The decoded jwt 
+ * @param {string} res.jwtPayLoad._id - User's ID
+ * @param {string} res.username - User's username
+ * @returns {Object} response  - An express Response Object
+ * @returns {number} response.statusCode - The status of of the operation
+ */
 
-module.exports = {verifyUser,addUser,deleteUser};</code></pre>
+function updateUserMail(req,res){
+  let {id,email} = req.body;
+  if(id!=req.jwtPayLoad._id){
+    res.status(401).end()
+  }
+  user.updateOne({_id:id},{email:email},(err,result)=>{
+    console.log(result)
+    if(result.modifiedCount){
+      res.status(202).end()
+      responseLogger(res);
+    }
+    res.status(400).end()
+  })
+  
+}
+
+/**
+ * Handles the POST /user/password request
+ * @name updateUserPassWord
+ * @function
+ * @async
+ * @memberof module:controllers/user
+ * @param {Object} req - Express Request Object
+ * @param {string} req.body._id - The _id of the user to be upated
+ * @param {string} res.body.password
+ * @param {Object} res.jwtPayLoad - The decoded jwt 
+ * @param {string} res.jwtPayLoad._id - User's ID
+ * @param {string} res.username - User's username
+ * @returns {Object} response  - An express Response Object
+ * @returns {number} response.statusCode - The status of of the operation
+ */
+
+ async function updateUserPassWord(req,res){
+  let {id,password} = req.body;
+  if(id!=req.jwtPayLoad._id){
+    res.status(401).end()
+  }
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password,salt)
+  
+  user.updateOne({_id:id},{key:hashedPassword},(err,result)=>{
+    if(err){
+      res.status(500).end()
+      responseLogger(res);
+    }
+    if(result.modifiedCount){
+      res.status(202).end()
+      responseLogger(res);
+    }
+    res.status(400).end()
+    responseLogger(res);
+  })
+  
+}
+
+
+
+module.exports = {verifyUser,addUser,deleteUser,updateUserMail,updateUserPassWord};</code></pre>
         </article>
     </section>
 
@@ -206,13 +278,13 @@ module.exports = {verifyUser,addUser,deleteUser};</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Grow App Server Documentation</a></h2><h3>Modules</h3><ul><li><a href="module-controllers_Authendication.html">controllers/Authendication</a></li><li><a href="module-controllers_JWT.html">controllers/JWT</a></li><li><a href="module-controllers_user.html">controllers/user</a></li><li><a href="module-models_JWT.html">models/JWT</a></li><li><a href="module-models_user.html">models/user</a></li><li><a href="module-routers_Authendication.html">routers/Authendication</a></li></ul><h3>Namespaces</h3><ul><li><a href="AutomationTesting.html">AutomationTesting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#tessstvar">tessstvar</a></li></ul>
+    <h2><a href="index.html">Grow App Server Documentation</a></h2><h3>Modules</h3><ul><li><a href="module-controllers_Authentication.html">controllers/Authentication</a></li><li><a href="module-controllers_JWT.html">controllers/JWT</a></li><li><a href="module-controllers_user.html">controllers/user</a></li><li><a href="module-models_JWT.html">models/JWT</a></li><li><a href="module-models_user.html">models/user</a></li><li><a href="module-routers_Authentication.html">routers/Authentication</a></li><li><a href="module-routers_User.html">routers/User</a></li></ul><h3>Namespaces</h3><ul><li><a href="AutomationTesting.html">AutomationTesting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#tessstvar">tessstvar</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Mon Sep 26 2022 22:01:29 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Sep 28 2022 17:53:15 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

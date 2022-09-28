@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: controllers/user</title>
+    <title>JSDoc: Module: controllers/Authentication</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: controllers/user</h1>
+    <h1 class="page-title">Module: controllers/Authentication</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>User controller</p></div>
+            <div class="description"><p>Authendication Controller handling all the authendication functions.</p></div>
         
 
         
@@ -87,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_userController.js.html">controllers/userController.js</a>, <a href="controllers_userController.js.html#line1">line 1</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -127,17 +127,15 @@
         <h3 class="subsection-title">Requires</h3>
 
         <ul>
-            <li><a href="https://www.npmjs.com/package/mongoose">mongoose</a></li>
+            <li>module:controllers/DataBase</li>
         
-            <li>bcrypt</li>
+            <li>module:controllers/User</li>
         
-            <li><a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
+            <li><a href="module-controllers_JWT.html">module:controllers/JWT</a></li>
         
             <li>module:responseLogger</li>
         
             <li>module:requestLogger</li>
-        
-            <li><a href="module-models_user.html">module:models/user</a></li>
         </ul>
     
 
@@ -160,7 +158,7 @@
     
 
     
-    <h4 class="name" id=".addUser"><span class="type-signature">(async, static) </span>addUser<span class="signature">(fName, lName, username, email, password, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".logoutGet"><span class="type-signature">(static) </span>logoutGet<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object|number}</span></h4>
     
 
     
@@ -168,7 +166,8 @@
 
 
 <div class="description">
-    <p>Adds an user to the database</p>
+    <p>Handles the /logout GET request.
+Logs out an user by deleting his refresh token from the Data Base</p>
 </div>
 
 
@@ -204,7 +203,49 @@
 
         <tr>
             
-                <td class="name"><code>fName</code></td>
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Express Request Object</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>body.token</code></td>
             
 
             <td class="type">
@@ -220,20 +261,27 @@
 
             
 
-            <td class="description last"><p>The first name of the new user</p></td>
+            <td class="description last"><p>The refresh Token of the user</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>lName</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Object</span>
 
 
             
@@ -243,99 +291,7 @@
 
             
 
-            <td class="description last"><p>The last name of the new user</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The username of the new user</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The email of the new user</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>password</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The password of the new user</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A callback function that handles the result</p></td>
+            <td class="description last"><p>Express Response Object</p></td>
         </tr>
 
     
@@ -376,7 +332,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_userController.js.html">controllers/userController.js</a>, <a href="controllers_userController.js.html#line56">line 56</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -401,6 +357,48 @@
 
 
 
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    <p>response - An express Respose Object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>statusCode - The status code of the operation. 200 if successfull</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
 
 
 
@@ -412,7 +410,7 @@
     
 
     
-    <h4 class="name" id=".deleteUser"><span class="type-signature">(static) </span>deleteUser<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object|number}</span></h4>
+    <h4 class="name" id="~loginPost"><span class="type-signature">(inner) </span>loginPost<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object|string|string}</span></h4>
     
 
     
@@ -420,7 +418,8 @@
 
 
 <div class="description">
-    <p>Handles the DELETE /user request</p>
+    <p>Handles the /login POST request.
+Responses with an Access Token on successs</p>
 </div>
 
 
@@ -608,7 +607,623 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_userController.js.html">controllers/userController.js</a>, <a href="controllers_userController.js.html#line105">line 105</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    <p>response  - An express Response Object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>response.body.accessToken - The access Token for the user</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>response.body.refreshToken - The refresh Token for the user</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~refreshToken"><span class="type-signature">(inner) </span>refreshToken<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object|string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Handles the /token POST request.
+Generates a new Access Token for the user</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The express Request Object</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>body.refreshToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The refresh token of the user</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Express Response Object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line130">line 130</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    <p>response - The express Response Object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>response.body.accessToken - The new access Token for the user</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~registerPost"><span class="type-signature">(inner) </span>registerPost<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object|number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Handles the /register POST request.
+Send the server a new user's Data in the request body to create a new user in the data base</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The http request Object</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>body.fName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The first name of the new user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body.lName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The last name of the new user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body.username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The username of the new user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body.email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The email of the new user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body.password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The password of the new user</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Express Response Object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line59">line 59</a>
     </li></ul></dd>
     
 
@@ -686,7 +1301,7 @@
     
 
     
-    <h4 class="name" id=".updateUserMail"><span class="type-signature">(async, static) </span>updateUserMail<span class="signature">(req)</span><span class="type-signature"> &rarr; {Object|number}</span></h4>
+    <h4 class="name" id="~verifyAccessToken"><span class="type-signature">(inner) </span>verifyAccessToken<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {Object|number}</span></h4>
     
 
     
@@ -694,7 +1309,7 @@
 
 
 <div class="description">
-    <p>Handles the UPDATE /user/mail request</p>
+    <p>Handles the Authorization check at any route that needs it</p>
 </div>
 
 
@@ -772,7 +1387,7 @@
 
         <tr>
             
-                <td class="name"><code>body._id</code></td>
+                <td class="name"><code>headers.authorization</code></td>
             
 
             <td class="type">
@@ -788,7 +1403,7 @@
 
             
 
-            <td class="description last"><p>The _id of the user to be upated</p></td>
+            <td class="description last"><p>The accessToken is inside this string after the bearer keyword</p></td>
         </tr>
 
     
@@ -802,30 +1417,7 @@
 
         <tr>
             
-                <td class="name"><code>res.body.email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res.jwtPayLoad</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
@@ -841,634 +1433,14 @@
 
             
 
-            <td class="description last"><p>The decoded jwt</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>User's ID</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>Express Response Object</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>res.username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>User's username</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_userController.js.html">controllers/userController.js</a>, <a href="controllers_userController.js.html#line170">line 170</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    <p>response  - An express Response Object</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    <p>response.statusCode - The status of of the operation</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".updateUserPassWord"><span class="type-signature">(async, static) </span>updateUserPassWord<span class="signature">(req)</span><span class="type-signature"> &rarr; {Object|number}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Handles the POST /user/password request</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Express Request Object</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>body._id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The _id of the user to be upated</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res.body.password</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res.jwtPayLoad</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The decoded jwt</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>_id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>User's ID</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res.username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>User's username</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_userController.js.html">controllers/userController.js</a>, <a href="controllers_userController.js.html#line202">line 202</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    <p>response  - An express Response Object</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    <p>response.statusCode - The status of of the operation</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".verifyUser"><span class="type-signature">(async, static) </span>verifyUser<span class="signature">(username, password, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Checks if the given credentials corresponds to an user. Handles the login's database query</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The user's username</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>password</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The user's password</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>next</code></td>
             
 
             <td class="type">
@@ -1484,7 +1456,7 @@
 
             
 
-            <td class="description last"><p>A callback function</p></td>
+            <td class="description last"><p>The next function</p></td>
         </tr>
 
     
@@ -1525,7 +1497,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_userController.js.html">controllers/userController.js</a>, <a href="controllers_userController.js.html#line24">line 24</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line191">line 191</a>
     </li></ul></dd>
     
 
@@ -1550,6 +1522,48 @@
 
 
 
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    <p>response - An express Respose Object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    <p>response.statusCode - The status code of the operation. 200 if successfull</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
 
 
 

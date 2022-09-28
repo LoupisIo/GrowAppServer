@@ -1,8 +1,8 @@
 /**User controller
  * @module controllers/user
- * @requires mongoose
- * @requires bcrypt
- * @requires dotenv
+ * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
+ * @requires {@link √https://www.npmjs.com/package/bcrypt|bcrypt}
+ * @requires {@link https://www.npmjs.com/package/dotenv|dotenv}
  * @requires responseLogger {@link module:logger}
  * @requires requestLogger {@link module:logger}
  * @requires {@link module:models/user}
@@ -18,7 +18,7 @@ let {responseLogger,requestLogger} = require("../utils/logger.js");
 
 //Create a connetion to the database
 const uri = "mongodb+srv://"+process.env.DbUser+":"+process.env.DbKey+"@cluster0.ravkk.mongodb.net/Thesis?retryWrites=true&w=majority";
-mongoose.connect(uri);
+//mongoose.connect(uri);
 
 
 /**
