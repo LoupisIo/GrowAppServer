@@ -22,6 +22,8 @@ const uri = "mongodb+srv://"+process.env.DbUser+":"+process.env.DbKey+"@cluster0
 mongoose.connect(uri);
 
 
+
+
 /**
  * Checks if the given credentials corresponds to an user. Handles the login's database query
  * @name verifyUser
