@@ -220,190 +220,7 @@
     
 
     
-    <h4 class="name" id=".generateRefressToken"><span class="type-signature">(static) </span>generateRefressToken<span class="signature">(payLaod, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Generates a new Refresh Token, saves it at the Database and passes it to the callback</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>payLaod</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>payLoad._id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The user's unique ID</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A callback Function</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line40">line 40</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~deleteRefreshToken"><span class="type-signature">(inner) </span>deleteRefreshToken<span class="signature">(token, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".deleteRefreshToken"><span class="type-signature">(async, static) </span>deleteRefreshToken<span class="signature">(token)</span><span class="type-signature"> &rarr; {jwtToken}</span></h4>
     
 
     
@@ -467,29 +284,6 @@
         </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A callback function</p></td>
-        </tr>
-
-    
     </tbody>
 </table>
 
@@ -527,7 +321,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line132">line 132</a>
+        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -552,6 +346,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">jwtToken</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -563,7 +375,7 @@
     
 
     
-    <h4 class="name" id="~findRefreshToken"><span class="type-signature">(inner) </span>findRefreshToken<span class="signature">(token, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".generateRefressToken"><span class="type-signature">(static) </span>generateRefressToken<span class="signature">(payLoad)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -571,7 +383,7 @@
 
 
 <div class="description">
-    <p>Searches the Database for the given Refresh Token. If found it passes it to the callback</p>
+    <p>Generates a new Refresh Token, saves it at the Database and passes it to the callback</p>
 </div>
 
 
@@ -607,173 +419,13 @@
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>payLoad</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>a JWT refresh Token</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The callback function</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line73">line 73</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~generateAccessToken"><span class="type-signature">(inner) </span>generateAccessToken<span class="signature">(payLaod)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Generates a new access JWT token with the given payload.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>payLaod</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
+<span class="param-type">payLoad</span>
 
 
             
@@ -824,7 +476,166 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line23">line 23</a>
+        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line46">line 46</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A refresh token</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~generateAccessToken"><span class="type-signature">(inner) </span>generateAccessToken<span class="signature">(payLoad)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Generates a new access JWT token with the given payload.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payLoad</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">payLoad</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A payLoad Object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line30">line 30</a>
     </li></ul></dd>
     
 
@@ -877,34 +688,43 @@
 
 
         
-            
-
     
 
     
-    <h4 class="name" id="~verifyAccessToken"><span class="type-signature">(inner) </span>verifyAccessToken<span class="signature">(token, callback)</span><span class="type-signature"></span></h4>
-    
+        <h3 class="subsection-title">Type Definitions</h3>
 
-    
+        
+                
+<h4 class="name" id="~payLoad">payLoad</h4>
+
 
 
 
 <div class="description">
-    <p>Accepts a access token and verifies it</p>
+    <p>The json web token payload</p>
 </div>
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
 
 
 
 
 
+    <h5 class="subsection-title">Properties:</h5>
 
-    <h5>Parameters:</h5>
     
 
-<table class="params">
+<table class="props">
     <thead>
     <tr>
         
@@ -926,7 +746,7 @@
 
         <tr>
             
-                <td class="name"><code>token</code></td>
+                <td class="name"><code>_id</code></td>
             
 
             <td class="type">
@@ -942,20 +762,20 @@
 
             
 
-            <td class="description last"><p>A JWT access token</p></td>
+            <td class="description last"><p>The user's ID</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>username</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">string</span>
 
 
             
@@ -965,14 +785,12 @@
 
             
 
-            <td class="description last"><p>A callback function</p></td>
+            <td class="description last"><p>The user's username</p></td>
         </tr>
 
     
     </tbody>
 </table>
-
-
 
 
 
@@ -1006,7 +824,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line115">line 115</a>
+        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -1022,183 +840,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
             
-
-    
-
-    
-    <h4 class="name" id="~verifyRefreshToken"><span class="type-signature">(inner) </span>verifyRefreshToken<span class="signature">(token, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Accepts a refresh token and verifies it</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A JWT refresh token</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A callback function</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_jwtController.js.html">controllers/jwtController.js</a>, <a href="controllers_jwtController.js.html#line94">line 94</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
     
 
     
@@ -1218,7 +860,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 29 2022 15:02:28 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 29 2022 20:27:12 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

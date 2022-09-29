@@ -29,23 +29,25 @@
             <pre class="prettyprint source linenums"><code>/** Authendication Controller handling all the authendication functions.
  * @module controllers/Authentication
  * @requires {@link module:controllers/DataBase}
- * @requires {@link module:controllers/User}
+ * @requires {@link module:controllers/user}
  * @requires {@link module:controllers/JWT}
- * @requires responseLogger {@link module:logger}
- * @requires requestLogger {@link module:logger}
+ * @requires {@link https://www.npmjs.com/package/dotenv|dotenv}
+ * @requires {@link https://www.npmjs.com/package/jsonwebtoken|jsonwebtoken}
  */
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const userController = require("../Controllers/userController.js")
 const jwtController = require("../Controllers/jwtController.js")
-let {responseLogger,requestLogger} = require("../utils/logger.js")
-const jwt = require('jsonwebtoken');
 const {user} = require('../dbModel/user.js');
+const {jwtToken} = require('../dbModel/jwtModel.js');
 
 /**
  *  Handles the /login POST request.
  *  Responses with an Access Token on successs
  * @name loginPost
  * @function
+ * @async
  * @memberof module:controllers/Authentication
  * @inner
  * @param {Object} req - Express Request Object
@@ -57,12 +59,10 @@ const {user} = require('../dbModel/user.js');
  * @returns {string} response.body.refreshToken - The refresh Token for the user
  */
  module.exports.loginPost = async function (req,res){
-  //Loggin the request at the server terminal
-  requestLogger(req);
   try {
     //extracting the parametres from the request Body
     //If thoses dont exist, respond with bad request
-    const {username, password} = req.body || {function(){console.log("Hello");res.status(400).end();return;}}
+    const {username, password} = req.body || {function(){res.status(400).end();return;}}
     //Search the Database for a match
     if(isValid= await userController.verifyUser(username, password)){
       let jwtPayLoad = {
@@ -74,27 +74,24 @@ const {user} = require('../dbModel/user.js');
         accessToken:jwtController.generateAccessToken(jwtPayLoad),
         refreshToken: refreshToken
       }).end();
-      responseLogger(res)
     }else{
       //If the Authendication fails at any point, return a 401:Bad Request Status
-      res.status(400).end()
-      //Logging the response at the server terminal
-      responseLogger(res)
+      res.status(400).end();
     }
   }catch(error){
     //Catch error
     console.log(error)
     //Respond with 500:Interna; Server Error
-    //res.status(500).send().end();
-    //log The response at the server terminal
-    responseLogger(res)
+    res.status(500).send().end();
   }
 }
+
 /**
  *  Handles the /register POST request.
  *  Send the server a new user's Data in the request body to create a new user in the data base
  * @name registerPost
  * @function
+ * @async
  * @memberof module:controllers/Authentication
  * @inner
  * @param {Object} req - The http request Object
@@ -110,15 +107,13 @@ const {user} = require('../dbModel/user.js');
  */
 module.exports.registerPost = async function (req,res){
   try{
-    //Loggin the request at the server terminal
-    requestLogger(req);
     //Extracting the user's data from the request Body
     const  {fName,lName,username,email,password} = req.body;
     if(await user.findOne({$or:[{username:username},{email:email}]})){
       //A user with the same user name or password allready exists in the database
       //Respond with 403 Forbidden Eror
       res.status(403).end();
-      responseLogger(res)
+      
       return;
     }
     //Create a new user document with the given data
@@ -132,16 +127,12 @@ module.exports.registerPost = async function (req,res){
     })
     newUser = await newUser.save()
     //Else if we dont get an error or we get an result return  200:OK
-    res.status(200).end()
-    //Logging the response at the server terminal
-    responseLogger(res)
+    res.status(200).end();
   }catch(error){
       //Catch error
       console.log(error)
       //Respond with 500:Interna; Server Error
       res.status(500).send().end();
-      //log The response at the server terminal
-      responseLogger(res)
   }
 }
 
@@ -150,6 +141,7 @@ module.exports.registerPost = async function (req,res){
  * Logs out an user by deleting his refresh token from the Data Base
  * @name logoutGet
  * @function
+ * @async
  * @memberof module:controllers/Authentication
  * @param {Object} req - Express Request Object
  * @param {string} req.body.token - The refresh Token of the user
@@ -157,25 +149,24 @@ module.exports.registerPost = async function (req,res){
  * @returns {Object} response - An express Respose Object
  * @returns {number} statusCode - The status code of the operation. 200 if successfull
  */
-module.exports.logoutGet = (req,res)=>{
-  //Loggin the request at the server terminal
-  requestLogger(req)
-  //Extraction the refresh token from the body
-  const {token} = req.body;
-  //Deleting the refresh Token from the server
-  jwtController.deleteRefreshToken(token,(error,result)=>{
-    //If we get an error or no token was deleted, return 400:Bad Request 
-    if(error || !result){
-      res.status(400).end()
-      //Logging the response at the server terminal
-      responseLogger(res)
-    }else if(!error &amp;&amp; result){
-      //Else if we dont get an error or we get an result return  200:OK
-      res.status(200).end()
-      //Logging the response at the server terminal
-      responseLogger(res)
-    }
-  })
+ module.exports.logoutGet = async (req,res)=>{
+  try{
+      //Extraction the refresh token from the body
+      const {token} = req.body || function(){res.status(400).end();return;}
+      let deleted
+      if(deleted = await jwtController.deleteRefreshToken(token)){
+        //Else if we dont get an error or we get an result return  200:OK
+        res.status(200).end()
+      }else{
+        res.status(400).end();
+        return;
+      }
+  }catch(error){
+    //Catch error
+    console.log(error)
+    //Respond with 500:Interna; Server Error
+    res.status(500).send().end();
+  }
 }
 
 /**
@@ -191,59 +182,35 @@ module.exports.logoutGet = (req,res)=>{
  * @returns {Object} response - The express Response Object
  * @return {string} response.body.accessToken - The new access Token for the user
  */
-module.exports.refreshToken=(req,res)=>{
-  //Loggin the request at the server terminal
-  requestLogger(req)
-  //Extraction the refresh token form he request Body
-  const {refreshToken} = req.body;
-  if(!refreshToken){
-    //If there is no token, return status code 400:Bad Request
-    res.status(400).json({error:"no token send"})
-    //Log the response
-    responseLogger(res)
-    //return;
-    return;
-  }
-  //If there is a token at the request, search the database for it
-  jwtController.findRefreshToken(refreshToken,(result)=>{
-    //If the findRefreshToken, returns a result, it means the Refresh Token was found
-    if(result){
-      //Verify the recieved RefreshToken token
-      jwtController.verifyRefreshToken(refreshToken,(result)=>{
-        //If the verification iss successfull, create a new JWT payLaod, generate a new Access Token
-        //And send it back.
-        if(result){
-          let jwtPayLoad={
-            _id:result._id,
-            username:result.username,
-          }
-          //Generate new Access Token
-          let newAccessToken = jwtController.generateAccessToken(jwtPayLoad)
-          //Respond with a 200:OK status code and the new access token inside the body
-          res.status(200).json({accessToken:newAccessToken}).end()
-          //Log the response
-          responseLogger(res)
-        }else{
-          //result = null. Therefore the verification process failed.
-          //respond with a 401:Unauthorized status code
-          res.status(401).end()
-          responseLogger(res)
-        }
-      })
+ module.exports.refreshToken= async (req,res)=>{
+  try {
+      const {refreshToken} = req.body ||function(){res.status(400).json({error:"no token send"});}
+      jwtPayLoad = jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET);
+      if(jwtToken.findOne({key:refreshToken,owner:jwtPayLoad._id})){
+        //Generate new Access Token
+        let newAccessToken = jwtController.generateAccessToken(jwtPayLoad)
+        //Respond with a 200:OK status code and the new access token inside the body
+        res.status(200).json({accessToken:newAccessToken}).end();
+      }else{
+          res.status(400).end();
+      }
+  } catch(error) {
+       //Catch error
+  if(error.message.startsWith("jwt")){
+      res.status(401).json({error:'invalid jwt'})
     }else{
-      //We didnt find the refreshToken in the Data Base
-      //Responds with a 400:Bad Request Status Code
-      res.status(400).send({error:"Invalid Token"}).end()
-      //Log the response
-      responseLogger(res)
+      console.log(error)
+      //Respond with 500:Interna; Server Error
+      res.status(500).send().end();
     }
-  })
+  }
 }
 
 /**
  * Handles the Authorization check at any route that needs it
  * @name verifyAccessToken
  * @function
+ * @async
  * @middleware
  * @memberof module:test/Authentication
  * @param {Object} req - Express Request Object
@@ -265,11 +232,8 @@ module.exports.refreshToken=(req,res)=>{
     }else{
       //if token isn't verified respond with  with 403: Forbidden status Status
       res.status(403).send().end();
-      //log The response at the server terminal
-      responseLogger(res)
     }
-  }
-  catch(error){
+  }catch(error){
     //Catch error
     if(error.message="jwt expired"){
       res.status(401).json({error:'jwt expired'})
@@ -278,10 +242,10 @@ module.exports.refreshToken=(req,res)=>{
       //Respond with 500:Interna; Server Error
       res.status(500).send().end();
     }
-    //log The response at the server terminal
-    responseLogger(res)
   }
-}</code></pre>
+}
+
+</code></pre>
         </article>
     </section>
 
@@ -297,7 +261,7 @@ module.exports.refreshToken=(req,res)=>{
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 29 2022 15:02:28 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 29 2022 20:27:12 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

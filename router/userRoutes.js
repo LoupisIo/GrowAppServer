@@ -38,7 +38,7 @@ router.use(express.json())
  * @returns {Object}  response: The express Response Object
  * @returns {number} response.statusCode: The status code of the response 
  */
-router.delete("/user",authController.verifyAccessToken,userController.deleteUser)
+router.delete("/user",userController.deleteUser)
 /**
  * Route serving a user delete request
  * 

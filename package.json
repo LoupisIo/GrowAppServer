@@ -27,6 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.4.1",
     "mongoose": "^6.3.0",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "randomstring": "^1.2.2",
     "swagger-jsdoc": "^6.2.5",

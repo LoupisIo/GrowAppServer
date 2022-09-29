@@ -5,6 +5,7 @@ const express = require('express');
 const session = require("express-session");
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+var morgan = require('morgan')
 const uri = "mongodb+srv://"+process.env.DbUser+":"+process.env.DbKey+"@cluster0.ravkk.mongodb.net/Thesis?retryWrites=true&w=majority";
 
 //Import custom modules
@@ -17,8 +18,10 @@ const {verifyAccessToken} = require("./controllers/authController.js");
 //Create the server
 const server = express();
 
+
 server.use(express.json())
 server.use(bodyParser.urlencoded({ extended: true }))
+
 
 //Add constants in .env
 const  {
@@ -45,7 +48,12 @@ server.use(session({
     secure: IN_PROD,
   }
 }))
+morgan.token('time',function(){
+  let timestamp = new Date(Date.now()).toLocaleString()
+  return timestamp
+})
 
+server.use(morgan(':time :method :url CODE::status  :response-time ms'));
 //Mount the rouer to the app
 server.use('/',authRoutes);
 server.use('/',dataRoutes);
