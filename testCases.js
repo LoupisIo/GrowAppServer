@@ -66,6 +66,7 @@ var autoTestMain= function(){
 function userCaseAlpha(n){
     
     testerBasic("Starting User Case Alpha");
+    let start = Date.now();
     testerBasic("Description: This is the first User Case made. This case registers n new users to the server")
     testerBasic("Then retrieves the Access Tokens via the /login POST route")
     testerBasic("Using the Access Tokens it access an AuthPath on the server")
@@ -81,8 +82,9 @@ function userCaseAlpha(n){
                         accessAuth(n,()=>{
                             tokenLogout(n,()=>{
                                 deleteUser(n,()=>{
-                                    testerBasic("User Case Alpha Completed with Sucess")
-
+                                    let timer= Date.now() - start;
+                                    testerBasic("User Case Alpha Completed with Sucess in "+ timer+"ms")
+                                    
                                 })
                             })
                         })
@@ -90,7 +92,7 @@ function userCaseAlpha(n){
                 })
             })
         })
-     });
+    });
 }
 
 

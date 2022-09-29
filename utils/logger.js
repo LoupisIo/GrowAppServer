@@ -2,9 +2,9 @@ const colors = require('colors');
 
 function requestLogger(request){
     let timestamp = new Date(Date.now())
-    let UtcString = timestamp.toUTCString();
+    let dateString = timestamp.toLocaleString();
     console.log(
-        "["+UtcString.green+"]"+
+        "["+dateString.green+"]"+
         " - "+"REQUEST".brightMagenta+
         " - METHOD: "+request.method.bgGrey+
         " - PATH: "+request.url.red
@@ -13,15 +13,15 @@ function requestLogger(request){
 
 function responseLogger(response){
     let timestamp = new Date(Date.now())
-    let UtcString = timestamp.toUTCString();
-    if(response.statusCode==200){
+    let dateString = timestamp.toLocaleString();
+    if(response.statusCode<300){
         console.log(
-        "["+UtcString.green+"]"+
+        "["+dateString.green+"]"+
         " - "+"RESPONSE".brightMagenta+
         " - STATUS: "+response.statusCode.toString().green
     )}else{
         console.log(
-            "["+UtcString.green+"]"+
+            "["+dateString.green+"]"+
             " - "+"RESPONSE".brightMagenta+
             " - STATUS: "+response.statusCode.toString().brightRed
             )
@@ -30,18 +30,18 @@ function responseLogger(response){
 
 function testerBasic(body){
     let timestamp = new Date(Date.now())
-    let UtcString = timestamp.toUTCString();
+    let dateString = timestamp.toLocaleString();
     console.log(
-        "["+UtcString.green+"]"+
+        "["+dateString.green+"]"+
         " - "+body
         )
 }
 
 function testMainLogger(arg1,n,arg2=""){
     let timestamp = new Date(Date.now())
-    let UtcString = timestamp.toUTCString();
+    let dateString = timestamp.toLocaleString();
     console.log(
-        "["+UtcString.green+"]"+
+        "["+dateString.green+"]"+
         " - "+arg1+
         " "+n+
         " "+arg2
@@ -50,17 +50,17 @@ function testMainLogger(arg1,n,arg2=""){
 
 function routineLogger(arg1,n,status){
     let timestamp = new Date(Date.now())
-    let UtcString = timestamp.toUTCString();
+    let dateString = timestamp.toLocaleString();
     if(status){
         console.log(
-            "["+UtcString.green+"]"+
+            "["+dateString.green+"]"+
             " - "+arg1+
             " "+"SUCCESS".green+
             " "+n
             )
     }else{
         console.log(
-            "["+UtcString.green+"]"+
+            "["+dateString.green+"]"+
             " - "+arg1+
             " "+"FAIL".red+
             " "+n
@@ -72,9 +72,9 @@ function inLineUpdate(arg1,arg2=null,arg3=null){
     process.stdout.clearLine()
     process.stdout.cursorTo(0)
     let timestamp = new Date(Date.now())
-    let UtcString = timestamp.toUTCString();
+    let dateString = timestamp.toLocaleString();
     process.stdout.write(
-        "["+UtcString.green+"]"+
+        "["+dateString.green+"]"+
         " - "+arg1+
         " - "+arg2+
         "/"+arg3

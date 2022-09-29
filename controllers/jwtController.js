@@ -47,28 +47,27 @@ module.exports.generateAccessToken =  function(payLoad){
  * @param {function} callback - A callback Function
  * 
  */
-module.exports.generateRefressToken = function(payLoad,callback){
-    jwtToken.findOne({owner:payLoad._id},(err,result)=>{
-        if(result){
-            callback(result.key)
-            return;
+ module.exports.generateRefreshToken = async function(payLoad){
+    try{
+        //Check if the user already has an Refresh Token
+        if(result = await jwtToken.findOne({owner:payLoad._id})){
+            return result.key;
+        }else{
+            //Generate the refresh token with the given payLoad
+            const refreshToken = jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET)
+            //create a new mongoose jtwToken document
+            let newToken = new jwtToken({
+                key:refreshToken,
+                owner:payLoad._id
+            })
+            //Save it at the database and return it
+            newToken = await newToken.save()
+            return await newToken.key;
         }
-        //Generate the refresh token with the given payLoad
-        const refreshToken = jwt.sign(payLoad,process.env.REFRESH_TOKEN_SECRET)
-        //create a new mongoose jtwToken document
-        let newToken = new jwtToken({
-            key:refreshToken,
-            owner:payLoad._id
-        })
-        //Save it at the database
-        newToken.save((error,savedToken)=>{
-            if(error){
-                console.log(error)
-            }
-            //Pass the refreshToken at the callback function
-            callback(savedToken.key)
-        })
-    })
+    }catch(error){
+        //On error throw it
+        throw new Error(error);
+    }
 }
 
 /**
@@ -127,7 +126,7 @@ module.exports.verifyAccessToken = function(token,callback){
     jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(error,jwtPayLoad)=>{
         if(error){callback(error,null)}
         callback(null,jwtPayLoad)
-    })
+    }) 
 }
 
 /**

@@ -5,6 +5,7 @@ const express = require('express');
 const session = require("express-session");
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const uri = "mongodb+srv://"+process.env.DbUser+":"+process.env.DbKey+"@cluster0.ravkk.mongodb.net/Thesis?retryWrites=true&w=majority";
 
 //Import custom modules
 const router = require("./router/router.js")
@@ -29,6 +30,9 @@ const  {
 
 //Set enviroment
 const IN_PROD = NODE_ENV === 'production'
+
+//Connect to dataBase
+mongoose.connect(uri);
 
 //User and init sessions
 server.use(session({

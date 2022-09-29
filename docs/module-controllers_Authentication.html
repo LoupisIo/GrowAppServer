@@ -332,7 +332,7 @@ Logs out an user by deleting his refresh token from the Data Base</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line97">line 97</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line120">line 120</a>
     </li></ul></dd>
     
 
@@ -607,7 +607,7 @@ Responses with an Access Token on successs</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line14">line 14</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -879,7 +879,7 @@ Generates a new Access Token for the user</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line130">line 130</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -1223,7 +1223,7 @@ Send the server a new user's Data in the request body to create a new user in th
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line59">line 59</a>
+        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -1296,280 +1296,6 @@ Send the server a new user's Data in the request body to create a new user in th
 
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="~verifyAccessToken"><span class="type-signature">(inner) </span>verifyAccessToken<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {Object|number}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Handles the Authorization check at any route that needs it</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Express Request Object</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>headers.authorization</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The accessToken is inside this string after the bearer keyword</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Express Response Object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The next function</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_authController.js.html">controllers/authController.js</a>, <a href="controllers_authController.js.html#line191">line 191</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    <p>response - An express Respose Object</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    <p>response.statusCode - The status code of the operation. 200 if successfull</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
     
 
     
@@ -1591,7 +1317,7 @@ Send the server a new user's Data in the request body to create a new user in th
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Sep 28 2022 17:53:15 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 29 2022 15:02:28 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

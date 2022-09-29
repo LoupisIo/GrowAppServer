@@ -38,6 +38,8 @@
 const userController = require("../Controllers/userController.js")
 const jwtController = require("../Controllers/jwtController.js")
 let {responseLogger,requestLogger} = require("../utils/logger.js")
+const jwt = require('jsonwebtoken');
+const {user} = require('../dbModel/user.js');
 
 /**
  *  Handles the /login POST request.
@@ -54,35 +56,39 @@ let {responseLogger,requestLogger} = require("../utils/logger.js")
  * @returns {string} response.body.accessToken - The access Token for the user
  * @returns {string} response.body.refreshToken - The refresh Token for the user
  */
-module.exports.loginPost = (req,res)=>{
+ module.exports.loginPost = async function (req,res){
   //Loggin the request at the server terminal
   requestLogger(req);
-  //extracting the parametres from the request Body
-  const { username, password } = req.body;
-   //Search the Database for a match
-  userController.verifyUser(username,password,(result)=>{
-    if (result){
-      //If the user is found in the dataBase, create the JWT tokens and send them
+  try {
+    //extracting the parametres from the request Body
+    //If thoses dont exist, respond with bad request
+    const {username, password} = req.body || {function(){console.log("Hello");res.status(400).end();return;}}
+    //Search the Database for a match
+    if(isValid= await userController.verifyUser(username, password)){
       let jwtPayLoad = {
-         _id:result._id,
-         username:result.username
-      };
-      let accessToken= jwtController.generateAccessToken(jwtPayLoad);
-      jwtController.generateRefressToken(jwtPayLoad,(refreshToken)=>{
-        res.status(200).json({
-          accessToken:accessToken,
-          refreshToken:refreshToken 
-        }).end();
-        //Logging the response at the server terminal
-        responseLogger(res);
-      });
+        _id:isValid._id,
+        username:isValid.username
+      }
+      let refreshToken =  await jwtController.generateRefreshToken(jwtPayLoad)
+      res.status(200).json({
+        accessToken:jwtController.generateAccessToken(jwtPayLoad),
+        refreshToken: refreshToken
+      }).end();
+      responseLogger(res)
     }else{
       //If the Authendication fails at any point, return a 401:Bad Request Status
       res.status(400).end()
       //Logging the response at the server terminal
       responseLogger(res)
     }
-  })
+  }catch(error){
+    //Catch error
+    console.log(error)
+    //Respond with 500:Interna; Server Error
+    //res.status(500).send().end();
+    //log The response at the server terminal
+    responseLogger(res)
+  }
 }
 /**
  *  Handles the /register POST request.
@@ -102,24 +108,41 @@ module.exports.loginPost = (req,res)=>{
  * @returns {number} response.statusCode - The status of of the operation
  * 
  */
-module.exports.registerPost = (req,res)=>{
-  //Loggin the request at the server terminal
-  requestLogger(req);
-  //Extracting the user's data from the request Body
+module.exports.registerPost = async function (req,res){
+  try{
+    //Loggin the request at the server terminal
+    requestLogger(req);
+    //Extracting the user's data from the request Body
     const  {fName,lName,username,email,password} = req.body;
-    //Try to add the user in the Data Base
-    userController.addUser(fName,lName,username,email,password,(savedUser)=>{
-      if(savedUser){
-        //If the operation was succssefull return a 201 status code
-        res.status(201).end();
-        responseLogger(res);
-      }else{
-        //If the operation fails return a 400:Bad reuest status code
-        res.status(400).end()
-        responseLogger(res);
-      }
+    if(await user.findOne({$or:[{username:username},{email:email}]})){
+      //A user with the same user name or password allready exists in the database
+      //Respond with 403 Forbidden Eror
+      res.status(403).end();
+      responseLogger(res)
+      return;
+    }
+    //Create a new user document with the given data
+    let newUser = new user({
+      username:username,
+      fName:fName,
+      lName:lName,
+      email:email,
+      key:password,
+      sensors:[]
     })
-    //Logging the response at the server terminal    
+    newUser = await newUser.save()
+    //Else if we dont get an error or we get an result return  200:OK
+    res.status(200).end()
+    //Logging the response at the server terminal
+    responseLogger(res)
+  }catch(error){
+      //Catch error
+      console.log(error)
+      //Respond with 500:Interna; Server Error
+      res.status(500).send().end();
+      //log The response at the server terminal
+      responseLogger(res)
+  }
 }
 
 /**
@@ -173,11 +196,13 @@ module.exports.refreshToken=(req,res)=>{
   requestLogger(req)
   //Extraction the refresh token form he request Body
   const {refreshToken} = req.body;
-  if(refreshToken==null){
+  if(!refreshToken){
     //If there is no token, return status code 400:Bad Request
-    res.status(400).send({error:"no token send"}).end()
+    res.status(400).json({error:"no token send"})
     //Log the response
     responseLogger(res)
+    //return;
+    return;
   }
   //If there is a token at the request, search the database for it
   jwtController.findRefreshToken(refreshToken,(result)=>{
@@ -205,7 +230,6 @@ module.exports.refreshToken=(req,res)=>{
           responseLogger(res)
         }
       })
-
     }else{
       //We didnt find the refreshToken in the Data Base
       //Responds with a 400:Bad Request Status Code
@@ -221,8 +245,7 @@ module.exports.refreshToken=(req,res)=>{
  * @name verifyAccessToken
  * @function
  * @middleware
- * @memberof module:controllers/Authentication
- * @inner
+ * @memberof module:test/Authentication
  * @param {Object} req - Express Request Object
  * @param {string} req.headers.authorization - The accessToken is inside this string after the bearer keyword
  * @param {Object} res - Express Response Object
@@ -230,33 +253,34 @@ module.exports.refreshToken=(req,res)=>{
  * @returns {Object} response - An express Respose Object
  * @returns {number} response.statusCode - The status code of the operation. 200 if successfull
  */
-module.exports.verifyAccessToken=(req,res,next)=>{
-  //Log the request at the server terminal
-  //requestLogger(req)
+ module.exports.verifyAccessToken = async function (req,res,next){
   //Extract the Access Token from the request headers
   const authHeader = req.headers['authorization']
-  const token =authHeader &amp;&amp; authHeader.split(' ')[1]
-  if(token == null){
-    //If there is no token respond with 401:Unauthorized
-    res.status(401).end()
-    //log the response at the server terminal
-    responseLogger(res)
-    return;
-  }
-  //Verrify the Access Token
-  jwtController.verifyAccessToken(token,(error,jwtPayLoad)=>{
-    if(error){
-      //if there is an error respond with 403:Forbidden status
+  const token = (authHeader &amp;&amp; authHeader.split(' ')[1]) || function(){res.status(401).end();}
+  try{
+    let payLoad = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+    if(payLoad){
+      req.jwtPayLoad =payLoad;
+      next();
+    }else{
+      //if token isn't verified respond with  with 403: Forbidden status Status
       res.status(403).send().end();
       //log The response at the server terminal
       responseLogger(res)
-      return;
-    }else if(res.statusCode == 200){
-      req.jwtPayLoad = jwtPayLoad;
-      //else, if no change was make to the status code, call the next function
-      next()
     }
-  })
+  }
+  catch(error){
+    //Catch error
+    if(error.message="jwt expired"){
+      res.status(401).json({error:'jwt expired'})
+    }else{
+      console.log(error)
+      //Respond with 500:Interna; Server Error
+      res.status(500).send().end();
+    }
+    //log The response at the server terminal
+    responseLogger(res)
+  }
 }</code></pre>
         </article>
     </section>
@@ -273,7 +297,7 @@ module.exports.verifyAccessToken=(req,res,next)=>{
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Sep 28 2022 17:53:15 GMT+0300 (Eastern European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Thu Sep 29 2022 15:02:28 GMT+0300 (Eastern European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
