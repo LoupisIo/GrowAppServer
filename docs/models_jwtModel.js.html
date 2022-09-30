@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Grow App Server Documentation</title>
+    <title>JSDoc: Source: models/jwtModel.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,42 @@
 
 <div id="main">
 
-    <h1 class="page-title">Grow App Server Documentation</h1>
+    <h1 class="page-title">Source: models/jwtModel.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** JWT Data Base model
+ * @module models/JWT
+ * @requires mongoose
+ */
 
+//Importing mongoose
+const mongoose = require('mongoose');
 
-    <h3> </h3>
+//Creating the JWT schema
+const jwtSchema = mongoose.Schema({
+    key:{type:String,required:true},
+    owner:{type:String,required:true}
+},
+{collection:"jwtTokens"}
+)
 
+/** 
+ * A JWT document
+ * @typedef {Object} jwtToken
+ * @property {string} key - the Token Value
+ * @property {string} owner = The owner's _id
+*/
+const jwtToken = mongoose.model("jwtModel",jwtSchema)
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+module.exports = {jwtToken}</code></pre>
+        </article>
+    </section>
 
 
 

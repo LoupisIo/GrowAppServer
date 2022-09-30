@@ -1,6 +1,6 @@
 /** User Data base model
  * @module models/user
- * @requires mongoose
+ * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
  * @requires bcrypt
  * 
  */
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     lName:{type:String , required: true},
     email:{type:String , required: true},
     key:{type:String,required: true},
-    sensors:[String],
+    devices:[String],
 },
     {collection : "Users"}
 )
@@ -47,7 +47,7 @@ userSchema.pre('save',async function (next){
  * @property {string} lName - Last name
  * @property {string} email - Email
  * @property {string} key - user's hashed passwrord
- * @property {Array.<string>} sensors - a list of the user's sensors
+ * @property {Array.<string>} devices - a list of the user's devices
  */
 const user = mongoose.model('userModel',userSchema);
 

@@ -9,7 +9,6 @@ var morgan = require('morgan')
 const uri = "mongodb+srv://"+process.env.DbUser+":"+process.env.DbKey+"@cluster0.ravkk.mongodb.net/Thesis?retryWrites=true&w=majority";
 
 //Import custom modules
-const router = require("./router/router.js")
 const authRoutes = require("./router/authRoutes.js");
 const dataRoutes = require("./router/dataRoutes.js");
 const userRoutes = require("./router/userRoutes.js");
@@ -81,5 +80,3 @@ server.listen(process.env.PORT,()=>{
 `
     )
 })
-
-

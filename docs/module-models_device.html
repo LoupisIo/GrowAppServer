@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: models/JWT</title>
+    <title>JSDoc: Module: models/device</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: models/JWT</h1>
+    <h1 class="page-title">Module: models/device</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>JWT Data Base model</p></div>
+            <div class="description"><p>Device Data base model</p></div>
         
 
         
@@ -87,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_jwtModel.js.html">models/jwtModel.js</a>, <a href="models_jwtModel.js.html#line1">line 1</a>
+        <a href="models_deviceModel.js.html">models/deviceModel.js</a>, <a href="models_deviceModel.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -127,7 +127,7 @@
         <h3 class="subsection-title">Requires</h3>
 
         <ul>
-            <li>module:mongoose</li>
+            <li><a href="https://www.npmjs.com/package/mongoose">mongoose</a></li>
         </ul>
     
 
@@ -148,13 +148,13 @@
 
         
                 
-<h4 class="name" id="~jwtToken">jwtToken</h4>
+<h4 class="name" id="~device">device</h4>
 
 
 
 
 <div class="description">
-    <p>A JWT document</p>
+    <p>The Device Model - It respresent an arduino board, member of the system</p>
 </div>
 
 
@@ -199,13 +199,13 @@
 
         <tr>
             
-                <td class="name"><code>key</code></td>
+                <td class="name"><code>name</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
             
@@ -215,7 +215,7 @@
 
             
 
-            <td class="description last"><p>the Token Value</p></td>
+            <td class="description last"><p>The name of the device</p></td>
         </tr>
 
     
@@ -228,7 +228,7 @@
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
             
@@ -238,7 +238,53 @@
 
             
 
-            <td class="description last"><p>= The owner's _id</p></td>
+            <td class="description last"><p>The owner's unique ID</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The device's secret key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sensors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;sensor></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A list of the availiable sensors on the device</p></td>
         </tr>
 
     
@@ -277,7 +323,154 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_jwtModel.js.html">models/jwtModel.js</a>, <a href="models_jwtModel.js.html#line17">line 17</a>
+        <a href="models_deviceModel.js.html">models/deviceModel.js</a>, <a href="models_deviceModel.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="~sensor">sensor</h4>
+
+
+
+
+<div class="description">
+    <p>The sensor model</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The I2C adress of the sensor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>measurementType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The measurment types the sensor takes</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_deviceModel.js.html">models/deviceModel.js</a>, <a href="models_deviceModel.js.html#line8">line 8</a>
     </li></ul></dd>
     
 

@@ -18,7 +18,7 @@ const jwt = require('jsonwebtoken');
  * jwt mongoose Model
  * @const
  */
-const {jwtToken} = require('../dbModel/jwtModel.js');
+const {jwtToken} = require('../models/jwtModel.js');
 
 /**
  * The json web token payload
@@ -48,7 +48,7 @@ module.exports.generateAccessToken =  function(payLoad){
  * @name generateRefressToken
  * @function
  * @memberof module:controllers/JWT
- * @param {payLoad} payLoad
+ * @param {payLoad} payLoad - A {@link payLoad} Object
  * @return {string} A refresh token
  */
  module.exports.generateRefreshToken = async function(payLoad){

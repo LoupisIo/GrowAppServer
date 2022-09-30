@@ -9,7 +9,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const {user} = require('../dbModel/user.js');
+const {user} = require('../models/userModel.js');
 
 /**
  * Checks if the given credentials corresponds to an user. Handles the login's database query
@@ -31,7 +31,7 @@ const {user} = require('../dbModel/user.js');
           _id:result._id,
           username:result.username,
           sensors:result.sensors
-        }
+        };
       }
     }else{
       return null;
@@ -40,6 +40,7 @@ const {user} = require('../dbModel/user.js');
     throw new Error(error);
   }
 };
+
 // REQUEST HANDLERS
 
 /**
@@ -55,9 +56,7 @@ const {user} = require('../dbModel/user.js');
  * @returns {Object} response  - An express Response Object
  * @returns {number} response.statusCode - The status of of the operation
  */
-
  async function deleteUser(req,res){
-  
   try{
       //If thoses dont exist, respond with bad request
   const {username, password} = req.body || {function(){res.status(400).end();return;}}
@@ -81,7 +80,6 @@ const {user} = require('../dbModel/user.js');
       //Respond with 500:Interna; Server Error
       res.status(500).send().end();
   }
-
 }
 /**
  * Handles the UPDATE /user/mail request
@@ -102,16 +100,14 @@ function updateUserMail(req,res){
   
   let {id,email} = req.body;
   if(id!=req.jwtPayLoad._id){
-    res.status(401).end()
+    res.status(401).end();
   }
   user.updateOne({_id:id},{email:email},(err,result)=>{
     if(result.modifiedCount){
-      res.status(202).end()
-      ;
+      res.status(202).end();
     }
-    res.status(400).end()
+    res.status(400).end();
   })
-  
 }
 
 /**
@@ -134,24 +130,20 @@ function updateUserMail(req,res){
   
   let {id,password} = req.body;
   if(id!=req.jwtPayLoad._id){
-    res.status(401).end()
+    res.status(401).end();
   }
   const salt = await bcrypt.genSalt(10)
   const hashedPassword = await bcrypt.hash(password,salt)
   
   user.updateOne({_id:id},{key:hashedPassword},(err,result)=>{
     if(err){
-      res.status(500).end()
-      ;
+      res.status(500).end();
     }
     if(result.modifiedCount){
-      res.status(202).end()
-      ;
+      res.status(202).end();
     }
-    res.status(400).end()
-    ;
+    res.status(400).end();
   })
-  
 }
 
 module.exports = {verifyUser,deleteUser,updateUserMail,updateUserPassWord};

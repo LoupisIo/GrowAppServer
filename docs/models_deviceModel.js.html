@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Grow App Server Documentation</title>
+    <title>JSDoc: Source: models/deviceModel.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,65 @@
 
 <div id="main">
 
-    <h1 class="page-title">Grow App Server Documentation</h1>
+    <h1 class="page-title">Source: models/deviceModel.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Device Data base model
+ * @module models/device
+ * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
+ */
 
+const mongoose = require(mongoose);
 
-    <h3> </h3>
+/**
+ * The sensor model
+ * @typedef {Object} sensor
+ * @property {String} address - The I2C adress of the sensor
+ * @property {Array.&lt;String>} measurementType - The measurment types the sensor takes
+ */
 
+const sensorSchema = new mongoose.Schema({
+    address:{type: String},
+    measurementType:[String]
+})
 
+const deviceSchema = new mongoose.Schema({
+    name :{
+        type: String,
+        required: true,
+        unique: true
+    },
+    owner: {
+        type: String
+    },
+    key:{
+        type: String,
+        required: true
+    },
+    sensors:[sensorSchema]
+},
+    {collection:'devices'}
+)
 
+/**The Device Model - It respresent an arduino board, member of the system
+ * @typedef {Object} device
+ * @property {String} name - The name of the device
+ * @property {String} owner - The owner's unique ID
+ * @property {String} key - The device's secret key
+ * @property {Array.&lt;sensor>} sensors - A list of the availiable sensors on the device
+ */
+const device = mongoose.model('deviceModel',deviceSchema)
 
-
-
-
-
-
-
-    
-
-
-
-
-
+module.exports = {device}
+</code></pre>
+        </article>
+    </section>
 
 
 

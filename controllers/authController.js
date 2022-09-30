@@ -11,8 +11,8 @@ require('dotenv').config()
 
 const userController = require("../Controllers/userController.js")
 const jwtController = require("../Controllers/jwtController.js")
-const {user} = require('../dbModel/user.js');
-const {jwtToken} = require('../dbModel/jwtModel.js');
+const {user} = require('../models/userModel.js');
+const {jwtToken} = require('../models/jwtModel.js');
 
 /**
  *  Handles the /login POST request.
@@ -94,8 +94,7 @@ module.exports.registerPost = async function (req,res){
       fName:fName,
       lName:lName,
       email:email,
-      key:password,
-      sensors:[]
+      key:password
     })
     newUser = await newUser.save()
     //Else if we dont get an error or we get an result return  200:OK
