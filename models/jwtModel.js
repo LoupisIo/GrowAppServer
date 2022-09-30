@@ -1,6 +1,6 @@
 /** JWT Data Base model
  * @module models/JWT
- * @requires mongoose
+ * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
  */
 
 //Importing mongoose

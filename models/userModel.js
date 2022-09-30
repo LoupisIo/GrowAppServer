@@ -1,7 +1,7 @@
 /** User Data base model
  * @module models/user
  * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
- * @requires bcrypt
+ * @requires {@link https://www.npmjs.com/package/bcrypt|bcrypt}
  * 
  */
 

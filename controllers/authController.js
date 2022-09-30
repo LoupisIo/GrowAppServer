@@ -1,8 +1,9 @@
 /** Authendication Controller handling all the authendication functions.
  * @module controllers/Authentication
- * @requires {@link module:controllers/DataBase}
  * @requires {@link module:controllers/user}
  * @requires {@link module:controllers/JWT}
+ * @require  {@link module:models/user}
+ * @requires {@link module:models/JWT}
  * @requires {@link https://www.npmjs.com/package/dotenv|dotenv}
  * @requires {@link https://www.npmjs.com/package/jsonwebtoken|jsonwebtoken}
  */

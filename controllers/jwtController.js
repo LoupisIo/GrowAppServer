@@ -1,7 +1,7 @@
 /** Json Web Tokens Controller
  * @module controllers/JWT
+ * @requires {@link module:models/JWT}
  * @requires {@link https://www.npmjs.com/package/jsonwebtoken|jsonwebtoken}
- * @requires models/JWT
  * @requires {@link https://www.npmjs.com/package/dotenv|dotenv}
  * 
  */
