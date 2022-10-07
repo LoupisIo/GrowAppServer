@@ -95,7 +95,6 @@ const {user} = require('../models/userModel.js');
  * @returns {Object} response  - An express Response Object
  * @returns {number} response.statusCode - The status of of the operation
  */
-
 function updateUserMail(req,res){
   
   let {id,email} = req.body;
@@ -125,7 +124,6 @@ function updateUserMail(req,res){
  * @returns {Object} response  - An express Response Object
  * @returns {number} response.statusCode - The status of of the operation
  */
-
  async function updateUserPassWord(req,res){
   
   let {id,password} = req.body;

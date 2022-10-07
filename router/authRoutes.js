@@ -6,22 +6,11 @@ require('dotenv').config()
  * @requires  {@link module:controllers/Authentication}
  */
 
-/**
- * Authendication Controller Module
- * @const
- * 
- */
+
 const authController = require("../controllers/authController.js")
-/**
- * Express Module
- * @const
- */
 
 const express = require("express")
-/**
- * Express Router
- * @const
- */
+
 const router = express.Router();
 
 router.use(express.json())

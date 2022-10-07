@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Module: routers/device</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: routers/device</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Express Router for the Device routes</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li><a href="https://www.npmjs.com/package/express">Express</a></li>
+        
+            <li><a href="module-controllers_device.html">module:controllers/device</a></li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="addSensor"><span class="type-signature">(route) </span>addSensor<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">/device/sensor</td>
+                            </tr>
+                            </table>
+                            <p>Adds a sensor to a device.
+Calls <a href="module-controllers_device.html#.addSensor">module:controllers/device.addSensor</a></p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">deviceName</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the name of the device</td>
+          </tr><tr>
+            <td class="name">deviceKey</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the key of the device</td>
+          </tr><tr>
+            <td class="name">address</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the I2C address of the device</td>
+          </tr><tr>
+            <td class="name">type</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the type of the measurment the sensor takes</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="deleteDevice"><span class="type-signature">(route) </span>deleteDevice<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">DELETE</td>
+                            <td class="name last">/device</td>
+                            </tr>
+                            </table>
+                            <p>Deletes a device from the database.
+Calls <a href="module-controllers_device.html#.deleteDevice">deviceController.deleteDevice</a></p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">name</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the name of the new device</td>
+          </tr><tr>
+            <td class="name">key</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">The password of the new device</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line61">line 61</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="getDeviceByName"><span class="type-signature">(route) </span>getDeviceByName<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/device/name/:name</td>
+                            </tr>
+                            </table>
+                            <p>Get Device by Name.
+Calls <a href="module-controllers_device.html#.getDeviceByName">deviceController.getDeviceByName</a></p>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:name</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the name of the device</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="getDeviceByOwner"><span class="type-signature">(route) </span>getDeviceByOwner<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/device/name/:owner</td>
+                            </tr>
+                            </table>
+                            <p>Get Devices by Owner.
+Calls <a href="module-controllers_device.html#.getDevicesByOwner">deviceController.getDeviceByOnwer</a></p>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:owner</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the username of the owner of the device</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line39">line 39</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="getDevices"><span class="type-signature">(route) </span>getDevices<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/devices</td>
+                            </tr>
+                            </table>
+                            <p>Get all devices.
+Calls <a href="module-controllers_device.html#.getDevices">deviceController.getDevices</a></p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="postDevice"><span class="type-signature">(route) </span>postDevice<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">/device</td>
+                            </tr>
+                            </table>
+                            <p>Add a new device.
+Calls <a href="module-controllers_device.html#.addDevice">deviceController.addDevice</a></p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">name</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the name of the new device</td>
+          </tr><tr>
+            <td class="name">key</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">The password of the new device</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="removeSensor"><span class="type-signature">(route) </span>removeSensor<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">DELETE</td>
+                            <td class="name last">/device/sensor</td>
+                            </tr>
+                            </table>
+                            <p>Removes a sensor from a device.
+Calls <a href="module-controllers_device.html#.removeSensor">module:controllers/device.removeSensor</a></p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">deviceName</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the name of the device</td>
+          </tr><tr>
+            <td class="name">deviceKey</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the key of the device</td>
+          </tr><tr>
+            <td class="name">address</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the I2C address of the device</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="updateOwner"><span class="type-signature">(route) </span>updateOwner<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">PATCH</td>
+                            <td class="name last">/device</td>
+                            </tr>
+                            </table>
+                            <p>Updates the owner of a device.
+Calls <a href="module-controllers_device.html#.updateOwner">deviceController.updateOwner</a></p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">owner</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the name of the new owner</td>
+          </tr><tr>
+            <td class="name">name</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the name of the device</td>
+          </tr><tr>
+            <td class="name">key</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">The password of the device</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_deviceRoutes.js.html">router/deviceRoutes.js</a>, <a href="router_deviceRoutes.js.html#line73">line 73</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Grow App Server Documentation</a></h2><h3>Modules</h3><ul><li><a href="module-controllers_Authentication.html">controllers/Authentication</a></li><li><a href="module-controllers_device.html">controllers/device</a></li><li><a href="module-controllers_JWT.html">controllers/JWT</a></li><li><a href="module-controllers_user.html">controllers/user</a></li><li><a href="module-models_device.html">models/device</a></li><li><a href="module-models_JWT.html">models/JWT</a></li><li><a href="module-models_user.html">models/user</a></li><li><a href="module-routers_Authentication.html">routers/Authentication</a></li><li><a href="module-routers_device.html">routers/device</a></li><li><a href="module-routers_User.html">routers/User</a></li></ul><h3>Namespaces</h3><ul><li><a href="AutomationTesting.html">AutomationTesting</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Oct 07 2022 18:06:56 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

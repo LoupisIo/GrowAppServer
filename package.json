@@ -32,5 +32,8 @@
     "randomstring": "^1.2.2",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0"
+  },
+  "devDependencies": {
+    "jsdoc-route-plugin": "^0.1.0"
   }
 }

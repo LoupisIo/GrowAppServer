@@ -1,5 +1,5 @@
 {
-    "plugins": ["plugins/markdown"],
+    "plugins": ["plugins/markdown","jsdoc-route-plugin"],
     "recurseDepth": 10,
     "source": {
         "include":[".","./router","./controllers","./models"],

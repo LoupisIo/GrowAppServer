@@ -12,6 +12,7 @@ const uri = "mongodb+srv://"+process.env.DbUser+":"+process.env.DbKey+"@cluster0
 const authRoutes = require("./router/authRoutes.js");
 const dataRoutes = require("./router/dataRoutes.js");
 const userRoutes = require("./router/userRoutes.js");
+const deviceRoutes = require("./router/deviceRoutes.js")
 const {verifyAccessToken} = require("./controllers/authController.js");
 
 //Create the server
@@ -57,26 +58,9 @@ server.use(morgan(':time :method :url CODE::status  :response-time ms'));
 server.use('/',authRoutes);
 server.use('/',dataRoutes);
 server.use('/',userRoutes);
+server.use('/',deviceRoutes)
 
 //Server Start
 server.listen(process.env.PORT,()=>{
   console.log('Server is up');
-  console.log(
-`
-                      ██████                              
-                    ██▒▒▒▒████                            
-              ████  ██▒▒██▒▒██         Grow App Server                    
-            ██░░░░██▒▒██▒▒▒▒██                            
-          ██░░██░░░░██▒▒████                              
-        ██░░░░░░██░░░░██                                  
-      ██░░░░░░░░░░░░░░░░██                                
-    ██░░░░░░░░░░░░░░░░░░██                                
-    ██░░░░██░░░░░░░░░░██                                  
-  ██░░░░░░░░██░░░░░░██                                    
-  ██░░░░██░░░░██░░██                                      
-██░░░░░░░░██░░████                                        
-██░░░░░░░░████                                            
-  ████████ 
-`
-    )
 })

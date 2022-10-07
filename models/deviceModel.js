@@ -1,9 +1,11 @@
 /** Device Data base model
  * @module models/device
  * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
+ * @requires {@link https://www.npmjs.com/package/bcrypt|bcrypt}
  */
 
-const mongoose = require(mongoose);
+const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 
 /**
  * The sensor model
@@ -14,7 +16,7 @@ const mongoose = require(mongoose);
 
 const sensorSchema = new mongoose.Schema({
     address:{type: String},
-    measurementType:[String]
+    measurementType:{type: String}
 })
 
 const deviceSchema = new mongoose.Schema({
@@ -34,6 +36,18 @@ const deviceSchema = new mongoose.Schema({
 },
     {collection:'devices'}
 )
+
+
+deviceSchema.pre('save',async function (next){
+    try {
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(this.key,salt)
+        this.key = hashedPassword
+        next()
+    }catch(error){
+        next(error);
+    }
+})
 
 /**The Device Model - It respresent an arduino board, member of the system
  * @typedef {Object} device
