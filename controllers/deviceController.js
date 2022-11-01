@@ -156,7 +156,6 @@ module.exports.deleteDevice = async function(req, res){
         }else{
             res.status(400).send({error:'Name or Key are wrong'}).end();
         }
-
     }catch(error){
         console.log(error);
         res.status(500).end()

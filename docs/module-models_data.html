@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Module: models/user</title>
+    <title>Module: models/Data</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: models/user</h1>
+    <h1 class="page-title">Module: models/Data</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>User Data base model</p></div>
+            <div class="description"><p>Data Model</p></div>
         
 
         
@@ -87,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_userModel.js.html">models/userModel.js</a>, <a href="models_userModel.js.html#line1">line 1</a>
+        <a href="models_dataModel.js.html">models/dataModel.js</a>, <a href="models_dataModel.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -128,8 +128,6 @@
 
         <ul>
             <li><a href="https://www.npmjs.com/package/mongoose">mongoose</a></li>
-        
-            <li><a href="https://www.npmjs.com/package/bcrypt">bcrypt</a></li>
         </ul>
     
 
@@ -144,160 +142,19 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~presave"><span class="type-signature">(inner) </span>presave<span class="signature">(next)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Pre user save function. It hashes the user's password before saving</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_userModel.js.html">models/userModel.js</a>, <a href="models_userModel.js.html#line24">line 24</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
 
     
         <h3 class="subsection-title">Type Definitions</h3>
 
         
                 
-<h4 class="name" id="~user">user</h4>
+<h4 class="name" id=".data">data</h4>
 
 
 
 
 <div class="description">
-    <p>The user model</p>
+    <p>Data Model</p>
 </div>
 
 
@@ -306,7 +163,7 @@
     <ul>
         <li>
             
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
         </li>
@@ -342,7 +199,30 @@
 
         <tr>
             
-                <td class="name"><code>username</code></td>
+                <td class="name"><code>time</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The timestamp when the measurment was taken</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>source</code></td>
             
 
             <td class="type">
@@ -358,20 +238,20 @@
 
             
 
-            <td class="description last"><p>The user's username</p></td>
+            <td class="description last"><p>The Device name from which the measurments were taken</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>fName</code></td>
+                <td class="name"><code>measurments</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Array.measurment</span>
 
 
             
@@ -381,99 +261,7 @@
 
             
 
-            <td class="description last"><p>First name</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>lName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Last name</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Email</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>key</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>user's hashed passwrord</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>devices</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;string></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>a list of the user's devices</p></td>
+            <td class="description last"><p>An array of the measurments taken</p></td>
         </tr>
 
     
@@ -512,7 +300,177 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_userModel.js.html">models/userModel.js</a>, <a href="models_userModel.js.html#line42">line 42</a>
+        <a href="models_dataModel.js.html">models/dataModel.js</a>, <a href="models_dataModel.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id=".measurment">measurment</h4>
+
+
+
+
+<div class="description">
+    <p>Measurment model</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The I2C address of the sensor</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>measurementType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The type of the measurment</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The value of the measurment</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_dataModel.js.html">models/dataModel.js</a>, <a href="models_dataModel.js.html#line8">line 8</a>
     </li></ul></dd>
     
 

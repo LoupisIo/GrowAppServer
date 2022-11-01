@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Module: routers/Data</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: routers/Data</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Express Router halndling the Data related requests</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_dataRoutes.js.html">router/dataRoutes.js</a>, <a href="router_dataRoutes.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li><a href="https://www.npmjs.com/package/express">Express</a></li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="DataUpload"><span class="type-signature">(route) </span>Data Upload<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">data/:deviceName</td>
+                            </tr>
+                            </table>
+                            <p>Route that handles saving the data from a device to the DataBase</p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">payLoad</td>
+            <td class="type">data</td>
+            
+            
+            <td class="description last">A <a href="module-models_Data.html#.data">Data</a> Object</td>
+          </tr>
+          </table>
+                            <h5>Header Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">authorization</td>
+            <td class="type">token</td>
+            
+            
+            <td class="description last">is the access JWT token ofthe user. must be in the following format 'bearer '</td>
+          </tr>
+          </table>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:deviceName</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the unique name of the device</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_dataRoutes.js.html">router/dataRoutes.js</a>, <a href="router_dataRoutes.js.html#line77">line 77</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="GetData"><span class="type-signature">(route) </span>Get Data<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/data/:deviceName/:startDate/:endDate</td>
+                            </tr>
+                            </table>
+                            <p>Route serving the measurments of a specific device. If no endDate is given, returns up the last saved Data.</p>
+                            <h5>Header Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">authorization</td>
+            <td class="type">token</td>
+            
+            
+            <td class="description last">is the access JWT token ofthe user. must be in the following format 'bearer '</td>
+          </tr>
+          </table>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:deviceName</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the unique name of the device</td>
+          </tr><tr>
+            <td class="name">:startDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The start Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr><tr>
+            <td class="name">?endDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The end Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_dataRoutes.js.html">router/dataRoutes.js</a>, <a href="router_dataRoutes.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="GetMeanData"><span class="type-signature">(route) </span>Get Mean Data<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/data/mean/:period/:deviceName/:startDate</td>
+                            </tr>
+                            </table>
+                            <p>Route serving the mean values of a device's mesurment for a specific period.</p>
+                            <h5>Header Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">authorization</td>
+            <td class="type">token</td>
+            
+            
+            <td class="description last">is the access JWT token ofthe user. must be in the following format 'bearer '</td>
+          </tr>
+          </table>
+                            <h5>Query Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:endDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The end Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr>
+          </table>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:period</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the period in which the mean values are calculated. Accepts [YEAR,MONTH,DAY]</td>
+          </tr><tr>
+            <td class="name">:deviceName</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the unique name of the device</td>
+          </tr><tr>
+            <td class="name">:startDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The start Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_dataRoutes.js.html">router/dataRoutes.js</a>, <a href="router_dataRoutes.js.html#line30">line 30</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="Getsensormean"><span class="type-signature">(route) </span>Get sensor mean<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/data/mean/:period/:deviceName/sensor/:address/:startDate</td>
+                            </tr>
+                            </table>
+                            <p>Route for the mean values of a specific sensor of a device</p>
+                            <h5>Header Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">authorization</td>
+            <td class="type">token</td>
+            
+            
+            <td class="description last">is the access JWT token ofthe user. must be in the following format 'bearer '</td>
+          </tr>
+          </table>
+                            <h5>Query Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:endDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The end Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr>
+          </table>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:period</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the period in which the mean values are calculated. Accepts [YEAR,MONTH,DAY]</td>
+          </tr><tr>
+            <td class="name">:deviceName</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the unique name of the device</td>
+          </tr><tr>
+            <td class="name">:address</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the I2C address of the sensor that collected the data.</td>
+          </tr><tr>
+            <td class="name">:startDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The start Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_dataRoutes.js.html">router/dataRoutes.js</a>, <a href="router_dataRoutes.js.html#line61">line 61</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="Getsensormeasurments"><span class="type-signature">(route) </span>Get sensor measurments<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/data/:deviceName/sensor/:address/:startDate</td>
+                            </tr>
+                            </table>
+                            <p>Route for data from a specific sensor of a device</p>
+                            <h5>Header Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">authorization</td>
+            <td class="type">token</td>
+            
+            
+            <td class="description last">is the access JWT token ofthe user. must be in the following format 'bearer '</td>
+          </tr>
+          </table>
+                            <h5>Query Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:endDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The end Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr>
+          </table>
+                            <h5>Route Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">:deviceName</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the unique name of the device</td>
+          </tr><tr>
+            <td class="name">:address</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">is the I2C address of the sensor that collected the data.</td>
+          </tr><tr>
+            <td class="name">:startDate</td>
+            <td class="type">Date</td>
+            
+            
+            <td class="description last">The start Date of the querry. Must be in the format MM-DD-YYYY</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router_dataRoutes.js.html">router/dataRoutes.js</a>, <a href="router_dataRoutes.js.html#line46">line 46</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Grow App Server Documentation</a></h2><h3>Modules</h3><ul><li><a href="module-controllers_Authentication.html">controllers/Authentication</a></li><li><a href="module-controllers_Data.html">controllers/Data</a></li><li><a href="module-controllers_device.html">controllers/device</a></li><li><a href="module-controllers_JWT.html">controllers/JWT</a></li><li><a href="module-controllers_user.html">controllers/user</a></li><li><a href="module-models_Data.html">models/Data</a></li><li><a href="module-models_device.html">models/device</a></li><li><a href="module-models_JWT.html">models/JWT</a></li><li><a href="module-models_user.html">models/user</a></li><li><a href="module-routers_Authentication.html">routers/Authentication</a></li><li><a href="module-routers_Data.html">routers/Data</a></li><li><a href="module-routers_device.html">routers/device</a></li><li><a href="module-routers_User.html">routers/User</a></li></ul><h3>Namespaces</h3><ul><li><a href="AutomationTesting.html">AutomationTesting</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Nov 01 2022 12:57:38 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

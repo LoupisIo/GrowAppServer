@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: models/userModel.js</title>
+    <title>Source: models/dataModel.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: models/userModel.js</h1>
+    <h1 class="page-title">Source: models/dataModel.js</h1>
 
     
 
@@ -26,60 +26,49 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** User Data base model
- * @module models/user
- * @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
- * @requires {@link https://www.npmjs.com/package/bcrypt|bcrypt}
- * 
+            <pre class="prettyprint source linenums"><code>/** Data Model
+ *  @module models/Data
+ *  @requires {@link https://www.npmjs.com/package/mongoose|mongoose}
  */
 
-//Import the node modules we will use
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-
-//Creating the user's schema
-const userSchema = new mongoose.Schema({
-    username: {type:String , required: true},
-    fName: {type:String , required: true},
-    lName:{type:String , required: true},
-    email:{type:String , required: true},
-    key:{type:String,required: true},
-    devices:[String],
-},
-    {collection : "Users"}
-)
+const mongoose = require("mongoose");
 
 /**
- * Pre user save function. It hashes the user's password before saving
- * @name presave
- * @function
- * @inner
- * @param {function} next
+ * Measurment model
+ * @typedef {Object} measurment
+ * @memberof module:models/Data
+ * @property {string} address - The I2C address of the sensor
+ * @property {string} measurementType - The type of the measurment
+ * @property {number} value - The value of the measurment
  */
-userSchema.pre('save',async function (next){
-    try {
-        const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(this.key,salt)
-        this.key = hashedPassword
-        next()
-    }catch(error){
-        next(error);
-    }
+
+const measurmentSchema = new mongoose.Schema({
+    address:{type: String},
+    measurmentType:{type: String},
+    value:{type: Number}
 })
 
-/**
- * The user model
- * @typedef {object} user
- * @property {string} username - The user's username
- * @property {string} fName - First name
- * @property {string} lName - Last name
- * @property {string} email - Email
- * @property {string} key - user's hashed passwrord
- * @property {Array.&lt;string>} devices - a list of the user's devices
- */
-const user = mongoose.model('userModel',userSchema);
 
-module.exports = {user}</code></pre>
+
+/**
+ * Data Model
+ * @typedef {Object} data
+ * @memberof module:models/Data
+ * @property {Date} time - The timestamp when the measurment was taken
+ * @property {string} source - The Device name from which the measurments were taken
+ * @property {Array.measurment} measurments - An array of the measurments taken
+ */
+const dataSchema = new mongoose.Schema({
+    time:{type: Date, required: true},
+    source:{type: String, required: true},
+    measurments:[measurmentSchema]
+
+},{collection:'WeatherData'}
+)
+
+const data = mongoose.model('dataModel',dataSchema)
+
+module.exports = {data}</code></pre>
         </article>
     </section>
 
